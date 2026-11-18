@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #0d1721;
+  background: #fdfcf8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings: Plus Jakarta Sans, tight tracking */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-jakarta), var(--font-geist-sans), system-ui, sans-serif;
+  letter-spacing: -0.03em;
+}
+
+/* Urdu mode: Nastaliq font + thora zyada line height */
+html[lang='ur'] body,
+html[lang='ur'] h1,
+html[lang='ur'] h2,
+html[lang='ur'] h3,
+html[lang='ur'] .font-display {
+  font-family: var(--font-urdu), 'Noto Nastaliq Urdu', serif;
+  letter-spacing: 0;
+}
+html[lang='ur'] body {
+  line-height: 2.1;
+}
+html[lang='ur'] h1,
+html[lang='ur'] h2,
+html[lang='ur'] h3 {
+  line-height: 1.9;
+}
+html[lang='ur'] .eyebrow {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1180px] px-5 sm:px-8;
+  }
+
+  /* Buttons: pill shape */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white shadow-pill hover:bg-brand-dark;
+  }
+  .btn-ghost {
+    @apply btn border border-ink/15 bg-paper text-ink hover:border-brand/40;
+  }
+  .btn-dark {
+    @apply btn bg-ink text-white hover:bg-night-3;
+  }
+  .btn-outline {
+    @apply btn border border-white/30 text-white hover:bg-white/10;
+  }
+  .btn-outline-dark {
+    @apply btn border border-ink/20 text-ink hover:bg-ink/5;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-paper p-6;
+  }
+  .section {
+    @apply py-16 sm:py-24;
+  }
+
+  /* "— OUR SERVICES" style label */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-brand;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-brand;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full bg-brand-soft px-2.5 py-1 text-[11px] font-semibold text-brand;
+  }
+  .icon-circle {
+    @apply grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand text-white;
+  }
+  .icon-circle-soft {
+    @apply grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-soft text-brand;
+  }
+
+  /* Curved section edge (reference site jaisa) */
+  .curve-t {
+    position: relative;
+    margin-top: -36px;
+    border-top-left-radius: 50% 36px;
+    border-top-right-radius: 50% 36px;
+  }
+
+  /* Bara halka watermark text (LAHORE / PROCESS / TRUSTED) */
+  .watermark {
+    @apply pointer-events-none select-none font-display font-extrabold uppercase leading-none text-ink/[0.045];
+    font-size: clamp(3rem, 12vw, 11rem);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee var(--marquee-duration, 36s) linear infinite;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink placeholder:text-ink/40 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+}
